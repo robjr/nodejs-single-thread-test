@@ -1,0 +1,16 @@
+version: "3"
+services:
+  php:
+    image: nginx/unit:1.29.0-php8.1
+    ports:
+      - 9000:9000
+    volumes:
+      - ./php/config.json:/docker-entrypoint.d/config.json
+      - ./php/:/app/
+  node:
+    image: node:12-slim
+    ports:
+      - 8000:8000
+    entrypoint: ['bash', '/app/run.sh']
+    volumes:
+      - ./node/:/app/

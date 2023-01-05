@@ -1,0 +1,33 @@
+{
+  "access_log": "/dev/stdout",
+  "listeners": {
+    "*:9000": {
+      "pass": "routes/app"
+    }
+  },
+  "applications": {
+    "app": {
+      "type": "php",
+      "root": "/app/",
+      "script": "/index.php",
+      "processes": {
+        "max": 30,
+        "spare": 30,
+        "idle_timeout": 60
+      },
+      "limits": {
+        "timeout": 60,
+        "requests": 1000
+      },
+    }
+  },
+  "routes": {
+    "app": [
+      {
+        "action": {
+          "pass": "applications/app"
+        }
+      }
+    ]
+  }
+}
